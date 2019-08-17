@@ -1,0 +1,67 @@
+<div class="container">
+
+  <input class="gap" type="text" [(ngModel)]="id" placeholder="id" />
+  <input type="text" [(ngModel)]="name" placeholder="name" />
+  <input type="text" [(ngModel)]="lastname" placeholder="lastname" />
+  <input type="text" [(ngModel)]="year" placeholder="year" />
+
+
+  <span style="padding-left: 50px;"
+    ><button (click)="buttonClicked()">add</button></span
+  >
+
+  <table class="table table-boarderd  table-streped table-hover">
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>year</th>
+      <th>lastname</th>
+    </tr>
+    <tr *ngFor="let row of rows">
+      <td>{{ row.id }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.lastname }}</td>
+      <td>{{ row.year }}</td>
+      <td>
+        <button (click)="delete(row)">delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" class="table table-responsive table-striped">
+    <tr *ngFor="let row of rows">
+      <td>
+        <input type="text" [(ngModel)]="row.id" [disabled]="!row.isEditable" />
+        <input
+          type="text"
+          [(ngModel)]="row.name"
+          [disabled]="!row.isEditable"
+        />
+        <input
+          type="text"
+          [(ngModel)]="row.lastname"
+          [disabled]="!row.isEditable"
+        />
+        <input
+          type="text"
+          [(ngModel)]="row.year"
+          [disabled]="!row.isEditable"
+        />
+      </td>
+      <td>
+        <button
+          (click)="row.isEditable = !row.isEditable"
+          *ngIf="!row.isEditable"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="row.isEditable"
+          (click)="row.isEditable = !row.isEditable"
+        >
+          Save
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
